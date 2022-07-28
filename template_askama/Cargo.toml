@@ -6,7 +6,7 @@ edition = "2018"
 
 [dependencies]
 ntex = { version = "0.5", features = ["tokio"] }
-askama = "0.9"
+askama = "0.11.0"
 
 [build-dependencies]
-askama = "0.9"
+askama = "0.11.0"
