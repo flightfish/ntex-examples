@@ -65,7 +65,7 @@ async fn main() -> std::io::Result<()> {
         .build(manager)
         .expect("Failed to create pool.");
 
-    let bind = "127.0.0.1:8080";
+    let bind = "192.168.1.45:8080";
 
     println!("Starting server at: {}", &bind);
 
