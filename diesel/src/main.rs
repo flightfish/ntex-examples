@@ -15,7 +15,7 @@ mod actions;
 mod models;
 mod schema;
 
-type DbPool = r2d2::Pool<ConnectionManager<PostgresConnection>>;
+type DbPool = r2d2::Pool<ConnectionManager<PgConnection>>;
 /// Finds user by UID.
 #[web::get("/user/{user_id}")]
 async fn get_user(
@@ -59,7 +59,7 @@ async fn main() -> std::io::Result<()> {
 
     // set up database connection pool
     let connspec = std::env::var("DATABASE_URL").expect("DATABASE_URL");
-    let manager = ConnectionManager::<PostgresConnection>::new(connspec);
+    let manager = ConnectionManager::<PgConnection>::new(connspec);
     let pool = r2d2::Pool::builder()
         .build(manager)
         .expect("Failed to create pool.");
