@@ -7,7 +7,7 @@
 extern crate diesel;
 
 use diesel::prelude::*;
-use diesel::r2d2::{self, ConnectionManager};
+use diesel::dsl::{self, ConnectionManager};
 use ntex::web::{self, middleware, App, Error, HttpResponse};
 use uuid::Uuid;
 
@@ -15,8 +15,7 @@ mod actions;
 mod models;
 mod schema;
 
-type DbPool = r2d2::Pool<ConnectionManager<SqliteConnection>>;
-
+type DbPool = dsl::Pool<ConnectionManager<SqliteConnection>>;
 /// Finds user by UID.
 #[web::get("/user/{user_id}")]
 async fn get_user(
@@ -61,7 +60,7 @@ async fn main() -> std::io::Result<()> {
     // set up database connection pool
     let connspec = std::env::var("DATABASE_URL").expect("DATABASE_URL");
     let manager = ConnectionManager::<SqliteConnection>::new(connspec);
-    let pool = r2d2::Pool::builder()
+    let pool = dsl::Pool::builder()
         .build(manager)
         .expect("Failed to create pool.");
 
