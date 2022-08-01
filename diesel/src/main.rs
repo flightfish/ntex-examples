@@ -60,7 +60,7 @@ async fn main() -> std::io::Result<()> {
     // set up database connection pool
     let connspec = std::env::var("DATABASE_URL").expect("DATABASE_URL");
     let manager = ConnectionManager::<PostgresConnection>::new(connspec);
-    let pool = d2r2::Pool::builder()
+    let pool = r2d2::Pool::builder()
         .build(manager)
         .expect("Failed to create pool.");
 
